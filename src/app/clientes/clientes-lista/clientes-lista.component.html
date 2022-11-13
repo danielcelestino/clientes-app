@@ -38,10 +38,30 @@
                             <button class="btn btn-primary" routerLink="/clientes-form/{{ cliente.id }}">
                                 <i class="fa fa-pen"></i>
                             </button>
+
+                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelecao">                                
+                                <i class="fa-solid fa-circle-minus"></i>
+                            </button>
+                           
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
+
+    <div id="modalDelecao" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Confirmação</h4>
+                </div>
+                <div class="modal-body">
+                    Confirma a exclusão?
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 </div>

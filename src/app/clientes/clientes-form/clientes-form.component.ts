@@ -46,17 +46,34 @@ export class ClientesFormComponent implements OnInit {
   }
 
   onSubmit(){
-    this.service.salvar(this.cliente).subscribe({
-      next: (data) => {        
-        this.success=true;
-        this.erros = [];
-        this.cliente = data;     
-      },
-      error: (error) => {
-          this.success=false;
-          this.erros = error.error.listErrors;        
-      }
-    }); 
+    if(this.id){
+      console.log('atualizando');
+      this.service.atualizar(this.cliente).subscribe({
+        next: (data) => {        
+          this.success=true;
+          this.erros = []; 
+          console.log(data);    
+        },
+        error: (error) => {
+            this.success=false;
+            this.erros = error.error.listErrors;   
+            console.log(error);     
+        }
+      }); 
+    }else{
+      console.log('salvando');
+      this.service.salvar(this.cliente).subscribe({
+        next: (data) => {        
+          this.success=true;
+          this.erros = [];
+          this.cliente = data;     
+        },
+        error: (error) => {
+            this.success=false;
+            this.erros = error.error.listErrors;        
+        }
+      }); 
+    }
 
 
     
@@ -106,5 +123,7 @@ export class ClientesFormComponent implements OnInit {
   voltarParaListagem(){
     this.router.navigate(['/clientes-lista']); 
   }
+
+  
 
 }

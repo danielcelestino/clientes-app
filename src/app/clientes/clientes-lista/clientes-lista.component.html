@@ -5,6 +5,19 @@
 
 <div class="container">
     <div class="row">
+        <div class="col-md-12">
+
+            <div class="alert alert-success" role="alert" *ngIf="msgSucesso">
+                {{msgSucesso}}
+              </div>
+
+            <div class="alert alert-danger" role="alert" *ngIf="msgErro">
+                {{msgErro}}
+            </div>
+            
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-2">
             <button class="btn btn-warning" (click)="novoCadastro()">
                 <i class="fa fa-plus"></i> Novo
@@ -39,7 +52,7 @@
                                 <i class="fa fa-pen"></i>
                             </button>
 
-                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelecao">                                
+                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelecao" (click)="preparaDelecao(cliente)">                                
                                 <i class="fa-solid fa-circle-minus"></i>
                             </button>
                            
@@ -50,14 +63,22 @@
         </div>
     </div>
 
-    <div id="modalDelecao" class="modal fade" role="dialog">
+    <div id="modalDelecao" class="modal fade" role="dialog" *ngIf="clienteSelecionado">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4>Confirmação</h4>
                 </div>
                 <div class="modal-body">
-                    Confirma a exclusão?
+                    Confirma a exclusão de <b>{{ clienteSelecionado.nome }}</b>?
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" (click)="deletarCliente()" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-check"></i> Confirma
+                    </button>
+                    <button class="btn btn-danger" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-ban"></i> Cancela
+                    </button>
                 </div>
             </div>
         </div>

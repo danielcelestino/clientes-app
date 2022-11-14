@@ -33,7 +33,7 @@ export class ServicoPrestadoFormComponent implements OnInit {
       next: (data) => {        
         this.success=true;
         this.erros = [];
-        this.servico = data;     
+        this.servico = new ServicoPrestado();  //Para limpar o formulario   
       },
       error: (error) => {
           this.success=false;

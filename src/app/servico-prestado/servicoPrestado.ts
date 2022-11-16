@@ -1,7 +1,9 @@
+import { Cliente } from "../clientes/cliente";
+
 export class ServicoPrestado{
     descricao?: string;
-    preco?: string;
+    valor?: string;
     data?: string;
-    idCliente?: number;
-    
+    cliente?: Cliente;
+    id?:number;    
 }

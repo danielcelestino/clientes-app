@@ -1,1 +1,129 @@
-<p>servico-prestado-lista works!</p>
+<h1 class="mt-4">Serviços Prestados</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-bitem active">Consulta</li>
+</ol>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="alert alert-success" role="alert" *ngIf="msgSucesso">
+                {{msgSucesso}}
+              </div>
+
+            <div class="alert alert-danger" role="alert" *ngIf="msgErro">
+                {{msgErro}}
+            </div>
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <button class="btn btn-warning" (click)="novoCadastro()">
+                <i class="fa fa-plus"></i> Novo
+            </button>
+
+        </div>
+    </div>
+
+    <br/>
+
+    <form #servicoPrestadoForm="ngForm" (ngSubmit)="consultar()">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="inputNome">Nome Cliente:</label>
+                    <input  class="form-control" type="text" [(ngModel)]="nome" name="nome" id="inputNome">
+                </div>
+            </div>
+
+            
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="selectMes">Mês: </label>
+                    <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="mes" id="selectMes">
+                        <option value="">Selecione ...</option>
+                        <option *ngFor="let mes of meses" [ngValue]="mes">
+                            {{ mes }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <br/>
+
+        <div class="row">
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-save"></i> Pesquisar
+                </button>
+
+                
+            </div>
+        </div>
+    </form>
+
+
+    <br/>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Descrição</th>
+                        <th>Data</th>
+                        <th>Preço</th>
+                        <th>Cliente</th>
+                       <!--<th></th>--> 
+                    </tr>
+
+                </thead>
+                <tbody>
+                    <tr *ngFor="let servicoPrestado of servicosPrestados">
+                        <td>{{servicoPrestado.id}}</td>
+                        <td>{{servicoPrestado.descricao}}</td>
+                        <td>{{servicoPrestado.data}}</td>
+                        <td>{{servicoPrestado.valor}}</td>
+                        <td>{{servicoPrestado.cliente.nome}}</td>
+                        <!--<td>
+                            <button class="btn btn-primary" routerLink="/servico-prestado-form/{{ servicoPrestado.id }}">
+                                <i class="fa fa-pen"></i>
+                            </button>
+
+                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelecao" (click)="preparaDelecao(servicoPrestado)">                                
+                                <i class="fa-solid fa-circle-minus"></i>
+                            </button>
+                           
+                        </td>-->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="modalDelecao" class="modal fade" role="dialog" *ngIf="servicoPrestadoSelecionado">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Confirmação</h4>
+                </div>
+                <div class="modal-body">
+                    Confirma a exclusão de <b>{{ servicoPrestadoSelecionado.descricao }}</b>?
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" (click)="deletarServicoPrestado()" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-check"></i> Confirma
+                    </button>
+                    <button class="btn btn-danger" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-ban"></i> Cancela
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

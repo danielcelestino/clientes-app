@@ -28,7 +28,7 @@ export class ServicoPrestadoListaComponent implements OnInit {
   }
 
   novoCadastro(){
-    this.router.navigate(['/servico-prestado-form'])
+    this.router.navigate(['/servico-prestado/form'])
   }
 
   preparaDelecao(servicoPrestado : ServicoPrestado){

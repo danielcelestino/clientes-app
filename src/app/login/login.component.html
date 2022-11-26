@@ -11,9 +11,14 @@
                                 </h3>
                             </div>
                             <div class="card-body">
-                                <div class="alert alert-danger" *ngIf="loginError">
-                                    Login e/ou senha incorreto(s).
+
+                                <div class="alert alert-success" *ngIf="msgSucess">
+                                    {{ msgSucess }}
                                 </div>
+
+                                <div class="alert alert-danger" role="alert" *ngFor="let erro of erros">
+                                    {{erro}}
+                                  </div>
 
                                 <form #loginForm="ngForm" (submit)="onSubmit()">
                                     <div class="form-group">
@@ -36,7 +41,7 @@
                                             Enviar
                                         </button>
 
-                                        <button type="submit" class="btn btn-success" *ngIf="cadastrando">
+                                        <button type="submit" class="btn btn-success" *ngIf="cadastrando" (click)="cadastrarUsuario($event)">
                                             Cadastrar
                                         </button>
 

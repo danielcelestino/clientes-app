@@ -24,7 +24,23 @@ export class LoginComponent {
 
   onSubmit(){
     console.log(this.username + " - " +this.password);
-    this.router.navigate(['/home']);
+    this.authService.logar(this.username, this.password).subscribe({
+      next: (data) =>{
+        const access_token = JSON.stringify(data);
+        localStorage.setItem('access_token',access_token);
+        this.loginError=false;
+        this.msgSucess = 'Cadastro realizado com sucesso! Efetue o login!';
+        this.erros = [];
+        console.log(data);
+        this.router.navigate(['/home']);
+      }, error: (error) => {
+        this.loginError=true;
+        this.msgSucess = null;
+        this.erros = error.error.listErrors; 
+      }
+  });
+
+    
   }
 
   preparaCadatrar(event:any){
@@ -48,6 +64,9 @@ export class LoginComponent {
               this.loginError=false;
               this.msgSucess = 'Cadastro realizado com sucesso! Efetue o login!';
               this.erros = [];
+              this.cadastrando=false;
+              this.username='';
+              this.password='';
             }, error: (error) => {
               this.loginError=true;
               this.msgSucess = null;

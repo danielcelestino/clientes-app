@@ -24,8 +24,10 @@ export class ClientesService {
     return this.http.put<Cliente>(`${this.apiURL}/${cliente.id}`, cliente);
   }
 
-  getClientes() : Observable<Cliente[]>{
-    return this.http.get<Cliente[]>(`${this.apiURL}`);    
+  getClientes() : Observable<Cliente[]>{    
+    //const headers = this.recuperaHeaderToken();
+    //return this.http.get<Cliente[]>(`${this.apiURL}`, {headers}); 
+    return this.http.get<Cliente[]>(`${this.apiURL}`);   
   }
 
   getClienteById(id : number) : Observable<Cliente>{
@@ -35,4 +37,13 @@ export class ClientesService {
   deleteCliente(id : number) : Observable<any>{
     return this.http.delete<any>(`${this.apiURL}/${id}`);    
   }
+
+  //recuperaHeaderToken(){
+  //  const tokenString = localStorage.getItem('access_token');
+  //  const token = JSON.parse(tokenString)
+  //  const headers = {
+  //    'Authorization': 'Bearer ' + token.access_token
+  //  }
+  //  return headers;
+  //}
 }

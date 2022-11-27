@@ -57,4 +57,18 @@ export class AuthService {
     return this.http.post(this.tokenURL,params.toString(), { headers});
 
   }
+
+  encerrarSessao(){
+    localStorage.removeItem('access_token');
+  }
+
+  getUsuarioAutenticado(){
+    const token = this.obterToken();
+
+    if(token){
+      const usuario = this.jwtHelper.decodeToken(token).username;
+      return usuario;
+    }
+    return null;
+  }
 }
